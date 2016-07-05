@@ -10,7 +10,7 @@
     .player
       .controls
         .play
-          md-button(class="md-fab" ng-class="{active: Player.isActive(item), isPlaying: Player.isPlaying(item)}" ng-click="Player.isPlaying(item) ? Player.pause(item) : Player.play(item)")
+          md-button(class="md-fab" ng-class="{active: Player.isActive(item), isPlaying: Player.isPlaying(item)}" ng-click="Player.isPlaying(item) ? Player.pause(item) : Player.play(item, queue)")
             i(class="material-icons play") play_arrow
             i(class="material-icons pause") pause
           

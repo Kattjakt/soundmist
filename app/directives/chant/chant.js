@@ -2,7 +2,8 @@ angular.module('soundmist').directive('chant', function ($http, $rootScope, API,
   return {
     restrict: 'E',
     scope: {
-      item: '=item'
+      item: '=item',
+      queue: '=queue'
     },
     replace: true,
     transclude: true,
@@ -17,7 +18,6 @@ angular.module('soundmist').directive('chant', function ($http, $rootScope, API,
       if (url) {
         scope.item.track.artwork_url_larger = url.replace('large.jpg', 't500x500.jpg')
       }
-
 
 
       class Waveform {
@@ -70,7 +70,7 @@ angular.module('soundmist').directive('chant', function ($http, $rootScope, API,
         click (position) {
           if (!Player.isPlaying(scope.item)) {
             console.log('starting song ...')
-            Player.play(scope.item)
+            Player.play(scope.item, scope.queue)
           }
 
           Player.setProgress(scope.item, position / this.width)

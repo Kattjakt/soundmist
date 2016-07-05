@@ -12,6 +12,7 @@ angular.module('soundmist').service('Player', class {
     this.paused = false
     this.repeat = false
     this.shuffle = false
+    this.queue = []
 
     this.scope.$watch(() => {
       if (this.Player) return this.Player.progress || 0
@@ -19,14 +20,39 @@ angular.module('soundmist').service('Player', class {
       if (progress === 1) {
         if (this.repeat) {
           console.log('repeat song')
+          this.play(this.currentItem)
         } else {
           console.log('next song')
+          this.next()
         }
       }
     })
   }
 
-  play (item) {
+  next () {
+    let index = this.queue.indexOf(this.currentItem)
+    var max = this.queue.length
+    if (index + 1 === max) {
+      console.log('> max of queue')
+      return
+    }
+
+    this.play(this.queue[index + 1], this.queue)
+  }
+
+  previous () {
+    let index = this.queue.indexOf(this.currentItem)
+    if (index === 0) {
+      console.log('< 0 of queue')
+      return
+    }
+
+    this.play(this.queue[index - 1], this.queue)
+  }
+
+  play (item, queue) {
+    this.queue = queue || []
+
     if (item === undefined) {
       this.Player.play()
       this.paused = false
