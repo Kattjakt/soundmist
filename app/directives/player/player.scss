@@ -187,6 +187,7 @@ player {
   }
 
   .upcoming {
+    align-self: flex-start;
     text-align: right;
     max-width: 25%;
 
@@ -220,25 +221,21 @@ player {
       .title, .author {
         @extend .fat;
         margin: 0;
+
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
       }
 
       .title {
-        margin-top: -5px;
-        font-size: 16px;
-        font-weight: 800;
-
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
+        font-size: 12px;
+        font-weight: 200;
       }
 
       .author {
-        font-size: 12px;
-        font-weight: 200;
-
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
+        font-size: 16px;
+        font-weight: 800;
+        margin-top: -5px;
       }
     }
   }

@@ -42,15 +42,15 @@
     .upcoming
       h2 Upcoming
       .track
-        .author {{ Player.getUpcoming(1).title }}
         .title {{ Player.getUpcoming(1).user.username }}
+        .author {{ Player.getUpcoming(1).title }}
         
       .track.medium
-        .author {{ Player.getUpcoming(2).title }}
         .title {{ Player.getUpcoming(2).user.username }}
+        .author {{ Player.getUpcoming(2).title }}
         
       .track.small
-        .author {{ Player.getUpcoming(3).title }}
         .title {{ Player.getUpcoming(3).user.username }}
+        .author {{ Player.getUpcoming(3).title }}
       
 md-slider(min="0" max="1000" ng-model="progress" id="progress" aria-label="Progress").progress
