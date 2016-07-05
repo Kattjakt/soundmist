@@ -72,6 +72,7 @@ angular.module('soundmist').service('Player', class {
 
       this.Player = this.Audio.load(this.API.getStreamURL(item))
       this.Player.play()
+      this.setVolume(this.volume)
 
       this.scope.$emit('SHOW_HEADER')
     }
