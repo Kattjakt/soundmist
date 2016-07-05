@@ -21,7 +21,7 @@ angular.module('soundmist').directive('player', function (Player) {
         }
 
         scope.wallpaper = {
-          'background': 'linear-gradient(rgba(255, 126, 0, 0.90),rgba(255, 119, 0, 0.75)), url(' + url + ')'
+          'background': 'linear-gradient(rgba(255, 126, 0, 0.90),rgba(255, 119, 0, 0.95)), url(' + url + ')'
         }
       })
 
