@@ -30,6 +30,7 @@ angular.module('soundmist').service('Player', class {
   }
 
   next () {
+    console.warn(this.currentItem, this.queue)
     let index = this.queue.indexOf(this.currentItem)
     var max = this.queue.length
     if (index + 1 === max) {
@@ -63,6 +64,7 @@ angular.module('soundmist').service('Player', class {
       this.Player.play()
     } else {
       this.currentItem = item
+      console.log('set currentItem')
 
       if (this.Player) {
         this.Player.stop()

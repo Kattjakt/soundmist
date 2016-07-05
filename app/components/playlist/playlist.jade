@@ -1,0 +1,6 @@
+.playlist
+  h1 {{ playlist.title }}
+  .item(ng-repeat="track in playlist.tracks")
+    whisper(track="track" queue="playlist.tracks")
+  
+  

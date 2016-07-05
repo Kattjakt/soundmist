@@ -12,7 +12,7 @@
       md-button(class="md-fab small" ng-click="Player.previous()")
         i(class="material-icons play") skip_previous
         
-      md-button(class="md-fab" ng-class="{active: Player.isActive(item), isPlaying: Player.isPlaying(item)}" ng-click="Player.isPlaying(item) ? Player.pause(item) : Player.play(item)")
+      md-button(class="md-fab" ng-class="{active: Player.isActive(track), isPlaying: Player.isPlaying(track)}" ng-click="Player.isPlaying(track) ? Player.pause(track) : Player.play(track)")
         i(class="material-icons play") play_arrow
         i(class="material-icons pause") pause
         
@@ -32,12 +32,12 @@
     .playing
       .wrapper
         .cover
-          img(src="{{ item.track.artwork_url }}")
+          img(src="{{ track.artwork_url }}")
     
         .about
-          .author {{ item.track.user.username }}
+          .author {{ track.user.username }}
             
-          .title {{ item.track.title }}
+          .title {{ track.title }}
     
     .upcoming
       h2 Upcoming

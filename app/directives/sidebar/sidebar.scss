@@ -65,9 +65,7 @@
     }
   }
 
-  .browse {
-    margin-bottom: 20px;
-
+  .browse, .playlists {
     .active {
       font-weight: 500;
       color: #FF8820;
@@ -75,6 +73,10 @@
         color: #FF8820;
       }
     }
+  }
+
+  .browse {
+    margin-bottom: 20px;
 
     > a {
       @extend .link;

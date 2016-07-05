@@ -1,0 +1,19 @@
+.whisper
+  .controls
+    md-button(class="md-fab" ng-class="{active: Player.isActive(track), isPlaying: Player.isPlaying(track)}" ng-click="Player.isPlaying(track) ? Player.pause(track) : Player.play(track, queue)")
+      i(class="material-icons play") play_arrow
+      i(class="material-icons pause") pause
+
+    md-button(class="md-icon-button")
+      i(class="material-icons") cached
+      
+    md-button(class="md-icon-button")
+      i(class="material-icons") link
+
+    md-button(class="md-icon-button" ng-click="Player.isFavorite(track) ? Player.removeFavorite(track) : Player.setFavorite(track)")
+      i.material-icons(ng-hide="Player.isFavorite(track)") favorite_border
+      i.material-icons.red(ng-show="Player.isFavorite(track)") favorite
+
+  .title {{ ::track.title }}
+  .artist {{ ::track.user.username }}
+  .duration {{ ::duration }}

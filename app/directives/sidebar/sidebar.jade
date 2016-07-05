@@ -28,4 +28,4 @@ nav.sidebar
       | +
   .playlists
     .scrollarea
-      a(md-ink-ripple ng-repeat="playlist in playlists") {{ playlist.title }} 
+      a(md-ink-ripple ng-repeat="playlist in playlists" ui-sref="playlist({id: playlist.id})" ui-sref-active="active") {{ playlist.title }} 

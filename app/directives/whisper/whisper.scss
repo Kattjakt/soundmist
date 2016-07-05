@@ -1,0 +1,82 @@
+.whisper {
+  height: 60px;
+  padding: 10px 20px 10px 5px;
+  border-bottom: 1px solid #e2e2e2;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  .controls {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .red {
+    color: #e74c3c;
+  }
+
+  .md-icon-button {
+    margin-left: -18px !important;
+    color: #4a4a4a;
+  }
+
+  .md-fab {
+    color: #4a4a4a;
+    transform: scale(0.7);
+    margin-right: 15px;
+  }
+
+  .md-fab, .md-fab:not([disabled]):hover {
+    background-color: white;
+  }
+
+  .active {
+    background-color: #ff8820 !important;
+    color: white;
+
+    .play {
+      display: none;
+    }
+
+    .pause {
+      display: block;
+    }
+  }
+
+  .play, .pause {
+    font-size: 40px;
+  }
+
+  .play {
+    display: block;
+  }
+
+  .pause {
+    display: none;
+  }
+
+  * {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: 300;
+  }
+
+  .title {
+    flex: 3;
+  }
+
+  .artist {
+    flex: 1;
+    text-align: right;
+  }
+
+  .duration {
+    margin-left: 20px;
+    font-weight: 500;
+  }
+}

@@ -5,12 +5,10 @@ angular.module('soundmist').directive('sidebar', function (API) {
     replace: false,
     templateUrl: 'directives/sidebar/sidebar.html',
     controller: function ($scope, $q, API, Handler) {
-
-      $q.all([
-        API.getUser().then(user => $scope.user = user),
-        API.getPlaylists().then(playlists => $scope.playlists = playlists),
-      ]).then(data => {
-        console.info('sidebar loaded')
+      API.ready.promise.then(() => {
+        $scope.user = cache.user
+        $scope.playlists = cache.playlists
+        
         Handler.setLoaded()
       })
     }

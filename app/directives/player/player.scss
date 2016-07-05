@@ -240,8 +240,8 @@ player {
     height: 100%;
     width: 100%;
 
-    background-position: center center;
-    background-size: cover;
+    background-position: center center !important;
+    background-size: cover !important;
   }
 
 }

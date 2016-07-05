@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module('soundmist').service('API', class {
-  constructor ($http, $q) {
+  constructor ($http, $q, $rootScope) {
     this.API_V1 = 'https://api.soundcloud.com/';
     this.API_V2 = 'https://api-v2.soundcloud.com/';
     this.$http = $http;
@@ -11,6 +11,17 @@ angular.module('soundmist').service('API', class {
 
     window.cache = {}
     this.getFavorites().then(ids => window.cache.favorites = ids)
+    this.getPlaylists().then(playlists => window.cache.playlists = playlists)
+    this.getUser().then(user => window.cache.user = user)
+
+    // Check if we've loaded enough data to display the page
+    this.ready = $q.defer()
+    $rootScope.$watch(() => {
+      return cache.playlists && cache.user
+    }, finished => {
+      if (!finished) return
+      this.ready.resolve()
+    })
   }
 
   getUser (force) {
@@ -108,51 +119,51 @@ angular.module('soundmist').service('API', class {
     return deferred.promise
   }
 
-  isFavorite (item) {
-    if (!item) return
-    if ('favorites' in window.cache && item.track) {
-      return cache.favorites.indexOf(item.track.id) > -1
+  isFavorite (track) {
+    if (!track) return
+    if ('favorites' in window.cache && track) {
+      return cache.favorites.indexOf(track.id) > -1
     }
   }
 
-  setFavorite (item) {
-    console.log(item)
+  setFavorite (track) {
+    console.log(track)
     let config = {
       method: 'PUT',
-      url: this.API_V1 + 'users/' + cache.user.id + '/favorites/' + item.track.id + '.json',
+      url: this.API_V1 + 'users/' + cache.user.id + '/favorites/' + track.id + '.json',
       params: {
         oauth_token: token
       }
     }
 
     return this.$http(config).then(response => {
-      if (cache.favorites.indexOf(item.track.id) == -1) {
-        cache.favorites.push(item.track.id)
+      if (cache.favorites.indexOf(track.id) == -1) {
+        cache.favorites.push(track.id)
       }
 
       return true
     })
   }
 
-  removeFavorite (item) {
+  removeFavorite (track) {
     let config = {
       method: 'DELETE',
-      url: this.API_V1 + 'users/' + cache.user.id + '/favorites/' + item.track.id + '.json',
+      url: this.API_V1 + 'users/' + cache.user.id + '/favorites/' + track.id + '.json',
       params: {
         oauth_token: token
       }
     }
 
     return this.$http(config).then(response => {
-      if (cache.favorites.indexOf(item.track.id) > -1) {
-        cache.favorites.splice(cache.favorites.indexOf(item.track.id))
+      if (cache.favorites.indexOf(track.id) > -1) {
+        cache.favorites.splice(cache.favorites.indexOf(track.id))
       }
 
       return true
     })
   }
 
-  getStreamURL (item) {
-    return item.track.uri + '/stream?oauth_token=' + token
+  getStreamURL (track) {
+    return track.uri + '/stream?oauth_token=' + token
   }
 })

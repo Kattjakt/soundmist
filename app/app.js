@@ -16,6 +16,11 @@ angular.module('soundmist').config(function ($stateProvider, $urlRouterProvider,
       templateUrl: 'components/charts/charts.html',
       controller: 'charts'
     })
+    .state('playlist', {
+      url: '/playlist/:id',
+      templateUrl: 'components/playlist/playlist.html',
+      controller: 'playlist'
+    })
 });
 
 angular.module('soundmist').run(function ($rootScope, Handler) {

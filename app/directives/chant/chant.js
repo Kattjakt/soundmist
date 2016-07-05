@@ -68,12 +68,12 @@ angular.module('soundmist').directive('chant', function ($http, $rootScope, API,
         }
 
         click (position) {
-          if (!Player.isPlaying(scope.item)) {
+          if (!Player.isPlaying(scope.item.track)) {
             console.log('starting song ...')
-            Player.play(scope.item, scope.queue)
+            Player.play(scope.item.track, scope.queue)
           }
 
-          Player.setProgress(scope.item, position / this.width)
+          Player.setProgress(scope.item.track, position / this.width)
         }
       }
 
@@ -89,7 +89,7 @@ angular.module('soundmist').directive('chant', function ($http, $rootScope, API,
           waveform.draw()
         })
 
-        scope.$watch('Player.getProgress(item)', function (progress) {
+        scope.$watch('Player.getProgress(item.track)', function (progress) {
           waveform.draw(progress)
         }, true)
       })

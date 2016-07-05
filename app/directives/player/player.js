@@ -9,18 +9,22 @@ angular.module('soundmist').directive('player', function (Player) {
       let slider = angular.element(document.querySelector('#progress'))[0]
       let blocking = false
 
-      scope.$watch('Player.getActive()', function (item) {
-        if (item == undefined) return
-        scope.item = item
+      scope.$watch('Player.getActive()', function (track) {
+        if (track == undefined) return
+        scope.track = track
 
         // Use the high-res artwork instead of the downscaled one provided
-        var url = item.track.artwork_url.replace('large.jpg', 't500x500.jpg')
+        var url = scope.track.artwork_url
+        if (url) {
+          url = url.replace('large.jpg', 't500x500.jpg')
+        }
+
         scope.wallpaper = {
           'background': 'linear-gradient(rgba(255, 126, 0, 0.90),rgba(255, 119, 0, 0.75)), url(' + url + ')'
         }
       })
 
-      scope.$watch('Player.getProgress(item)', function (progress) {
+      scope.$watch('Player.getProgress(track)', function (progress) {
         if (!blocking) scope.progress = progress * 1000
       })
 
@@ -33,8 +37,7 @@ angular.module('soundmist').directive('player', function (Player) {
           let x = event.pageX - this.offsetLeft
           let progress = x / slider.offsetWidth
 
-          Player.setProgress(scope.item, progress)
-
+          Player.setProgress(scope.track, progress)
           blocking = false
         }
       })

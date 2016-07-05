@@ -10,13 +10,13 @@
     .player
       .controls
         .play
-          md-button(class="md-fab" ng-class="{active: Player.isActive(item), isPlaying: Player.isPlaying(item)}" ng-click="Player.isPlaying(item) ? Player.pause(item) : Player.play(item, queue)")
+          md-button(class="md-fab" ng-class="{active: Player.isActive(item.track), isPlaying: Player.isPlaying(item.track)}" ng-click="Player.isPlaying(item.track) ? Player.pause(item.track) : Player.play(item.track, queue)")
             i(class="material-icons play") play_arrow
             i(class="material-icons pause") pause
           
         .meta
-          i(class="material-icons" ng-hide="API.isFavorite(item)" ng-click="Player.setFavorite(item)") favorite_border
-          i(class="material-icons active" ng-show="API.isFavorite(item)" ng-click="Player.removeFavorite(item)") favorite
+          i(class="material-icons" ng-hide="API.isFavorite(item.track)" ng-click="Player.setFavorite(item.track)") favorite_border
+          i(class="material-icons active" ng-show="API.isFavorite(item.track)" ng-click="Player.removeFavorite(item.track)") favorite
           i(class="material-icons") cached
           i(class="material-icons") link
 
