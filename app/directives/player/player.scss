@@ -209,6 +209,14 @@ player {
     .track {
       margin-bottom: 10px;
 
+      &.medium {
+        opacity: 0.6;
+      }
+
+      &.small {
+        opacity: 0.3;
+      }
+
       .title, .author {
         @extend .fat;
         margin: 0;
@@ -227,6 +235,10 @@ player {
       .author {
         font-size: 12px;
         font-weight: 200;
+
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
       }
     }
   }

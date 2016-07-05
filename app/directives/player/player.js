@@ -6,6 +6,7 @@ angular.module('soundmist').directive('player', function (Player) {
     templateUrl: 'directives/player/player.html',
     link: function (scope, element) {
       scope.Player = Player
+
       let slider = angular.element(document.querySelector('#progress'))[0]
       let blocking = false
 

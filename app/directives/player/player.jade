@@ -42,15 +42,15 @@
     .upcoming
       h2 Upcoming
       .track
-        .author Melvv
-        .title Weekend
+        .author {{ Player.getUpcoming(1).title }}
+        .title {{ Player.getUpcoming(1).user.username }}
         
-      .track
-        .author CSGOD
-        .title Wanted
+      .track.medium
+        .author {{ Player.getUpcoming(2).title }}
+        .title {{ Player.getUpcoming(2).user.username }}
         
-      .track
-        .author Future House Music
-        .title This One's For You (STVCKS Remix)
+      .track.small
+        .author {{ Player.getUpcoming(3).title }}
+        .title {{ Player.getUpcoming(3).user.username }}
       
 md-slider(min="0" max="1000" ng-model="progress" id="progress" aria-label="Progress").progress

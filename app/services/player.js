@@ -29,6 +29,11 @@ angular.module('soundmist').service('Player', class {
     })
   }
 
+  getUpcoming (offset) {
+    let index = this.queue.indexOf(this.currentItem)
+    return this.queue[index + offset]
+  }
+
   next () {
     console.warn(this.currentItem, this.queue)
     let index = this.queue.indexOf(this.currentItem)
