@@ -1,9 +1,17 @@
 .chant {
-  margin: 15px;
+  margin: 20px 15px;
   background-color: transparent;
 
   display: flex;
   flex-direction: column;
+
+  .playlist {
+    margin-top: 10px;
+
+    > .whisper:last-child {
+      border-bottom: none;
+    }
+  }
 
   .action {
     margin-bottom: 10px;
@@ -40,7 +48,7 @@
 
   .content {
     width: 100%;
-    
+
     .title, .artist {
       font-family: 'Roboto';
       font-weight: 300;
@@ -186,5 +194,4 @@
       }
     }
   }
-
 }

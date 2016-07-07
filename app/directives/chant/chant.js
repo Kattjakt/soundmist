@@ -29,8 +29,15 @@ angular.module('soundmist').directive('chant', function ($http, $rootScope, API,
 
       // Focus the first item in the playlist
       if (scope.item.type === 'playlist' || scope.item.type === 'playlist-repost') {
+        scope.isPlaylist = true
+
+        console.log(scope.item)
         scope.item.track = scope.item.playlist.tracks[0]
         scope.tracks = scope.item.playlist.tracks
+
+        // Display playlist title and author instead of current track info
+        scope.playlist_title = scope.item.playlist.title
+        scope.playlist_author = scope.item.playlist.user.username
 
         // Watch for track change and set focus to new index in playlist
         scope.$watch('Player.getActive()', function (active) {

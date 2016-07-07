@@ -10,8 +10,8 @@
       
     .content 
       .genre {{ item.track.genre }}
-      .artist {{ item.track.user.username }}
-      .title {{ item.track.title }}
+      .artist {{ playlist_author || item.track.user.username }}
+      .title {{ playlist_title || item.track.title }}
 
       .player
         .controls
@@ -20,7 +20,13 @@
               i(class="material-icons play") play_arrow
               i(class="material-icons pause") pause
             
-          .meta
+          .meta(ng-hide="isPlaylist")
+            i(class="material-icons" ng-hide="API.isFavorite(item.track)" ng-click="Player.setFavorite(item.track)") favorite_border
+            i(class="material-icons active" ng-show="API.isFavorite(item.track)" ng-click="Player.removeFavorite(item.track)") favorite
+            i(class="material-icons") cached
+            i(class="material-icons") link
+            
+          .meta(ng-show="isPlaylist")
             i(class="material-icons" ng-hide="API.isFavorite(item.track)" ng-click="Player.setFavorite(item.track)") favorite_border
             i(class="material-icons active" ng-show="API.isFavorite(item.track)" ng-click="Player.removeFavorite(item.track)") favorite
             i(class="material-icons") cached
