@@ -6,12 +6,12 @@
 
   .wrapper
     .artwork
-      img(src="{{ item.track.artwork_url_larger || item.track.artwork_url }}")
+      img(src="{{ item.playlist.artwork_url || item.track.artwork_url_larger || item.track.artwork_url }}")
       
     .content 
       .genre {{ item.track.genre }}
-      .artist {{ playlist_author || item.track.user.username }}
-      .title {{ playlist_title || item.track.title }}
+      .artist {{ item.playlist.user.username || item.track.user.username }}
+      .title {{ item.playlist.title || item.track.title }}
 
       .player
         .controls
