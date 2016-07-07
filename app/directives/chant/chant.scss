@@ -1,11 +1,60 @@
 .chant {
   margin: 15px;
   background-color: transparent;
+
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+
+  .action {
+    margin-bottom: 10px;
+
+    &, > * {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+
+    > img {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+    }
+
+    .type {
+      font-family: 'Roboto', sans-serif;
+      font-weight: 300;
+      margin-left: 10px;
+      font-size: 14px;
+    }
+
+    .link {
+      margin-right: 5px;
+      text-decoration: underline;
+    }
+  }
+
+  .wrapper {
+    display: flex;
+    flex-direction: row;
+  }
 
   .content {
     width: 100%;
+    
+    .title, .artist {
+      font-family: 'Roboto';
+      font-weight: 300;
+      margin: 10px;
+    }
+
+    .title {
+      font-size: 20px;
+      margin-top: 0;
+    }
+
+    .artist {
+      margin-bottom: 0;
+    }
   }
 
   .artwork {
@@ -43,21 +92,6 @@
       width: 150px;
       height: 150px;
     }
-  }
-
-  .title, .artist {
-    font-family: 'Roboto';
-    font-weight: 300;
-    margin: 10px;
-  }
-
-  .title {
-    font-size: 20px;
-    margin-top: 0;
-  }
-
-  .artist {
-    margin-bottom: 0;
   }
 
   .genre {
