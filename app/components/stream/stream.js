@@ -1,6 +1,12 @@
-angular.module('soundmist').controller('stream', function ($scope, Handler, API) {
+angular.module('soundmist').controller('stream', function ($scope, API) {
 
-  API.getStream().then(stream => {
-    $scope.stream = stream.collection
+  API.getStream(true).then(stream => {
+    $scope.stream = stream
   })
+
+  $scope.fetchPage = function () {
+    API.getStream().then(stream => {
+      $scope.stream = stream
+    })
+  }
 })

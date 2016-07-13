@@ -11,22 +11,68 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+
+    margin-right: 10px;
+
+    > i, .holder, .add > span {
+      transition: color 0.2s ease-in-out, width 0.1s ease-in-out, opacity 0.1s ease;
+    }
+
+    > i, .holder i {
+      cursor: pointer;
+      color: lightgrey;
+      margin-right: 2px;
+    }
+
+    .holder {
+      opacity: 0;
+      width: 0px;
+      display: flex;
+      align-items: center;
+
+      i {
+        text-overflow: clip;
+        overflow: visible;
+      }
+    }
+
+    .add {
+      font-size: 30px;
+      margin-right: 0;
+      color: lightgrey;
+
+      > span {
+        font-family: 'Roboto', sans-serif !important;
+        font-weight: 300;
+      }
+    }
+  }
+
+  &:hover {
+    .controls .add > span {
+      color: black;
+    }
+
+    .controls > i, .controls > .holder i {
+      color: #4a4a4a;
+    }
+
+    .controls > .holder {
+      width: 50px;
+      opacity: 1;
+    }
   }
 
   .red {
-    color: #e74c3c;
-  }
-
-  .md-icon-button {
-    margin-left: -18px !important;
-    color: #4a4a4a;
+    color: #e74c3c !important;
   }
 
   .md-fab {
     color: #4a4a4a;
     transform: scale(0.7);
-    margin-right: 15px;
+    margin-right: 0;
     transition: background-color 0.5s ease;
+    margin-left: -10px;
   }
 
   .md-fab, .md-fab:not([disabled]):hover {

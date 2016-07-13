@@ -1,6 +1,21 @@
 .stream {
   height: 100%;
 
+  > button {
+    margin: 30px auto;
+    display: block;
+    background-color: transparent;
+    border: 1px solid #ff8820;
+    border-radius: 3px;
+    padding: 5px 20px;
+    color: #ff8820;
+
+    &:not([disabled]):hover {
+      background-color: #ff8820;
+      color: white;
+    }
+  }
+
   > h1 {
     font-size: 22px;
     margin-left: 15px;

@@ -3,3 +3,4 @@
   .item(ng-repeat="item in stream")
     chant(item="item" queue="stream")
   
+  md-button(ng-show="stream" ng-click="fetchPage()") Next page

@@ -8,8 +8,9 @@ angular.module('soundmist').service('API', class {
     this.$q = $q;
 
 
-
     window.cache = {}
+    cache.stream = {}
+
     this.getFavorites().then(ids => window.cache.favorites = ids)
     this.getPlaylists().then(playlists => window.cache.playlists = playlists)
     this.getUser().then(user => window.cache.user = user)
@@ -62,23 +63,32 @@ angular.module('soundmist').service('API', class {
     })
   }
 
-  getStream (force) {
-    if (cache.stream && !force) {
-      console.log('got stream from cache')
-      return this.$q.resolve(cache.stream)
+  getStream (clear) {
+    if (clear) {
+      this.streamURL = undefined
     }
 
     let config = {
       method: 'GET',
-      url: this.API_V2 + 'stream',
+      url: this.streamURL || this.API_V2 + 'stream',
       params: {
         oauth_token: token,
-        limit: 50
+        limit: 20
       }
     }
 
     return this.$http(config).then(response => {
-      return cache.stream = response.data
+      let data = response.data
+
+
+
+      if (this.streamURL) {
+        this.streamURL = data.next_href
+        return cache.stream = cache.stream.concat(data.collection)
+      } else {
+        this.streamURL = data.next_href
+        return cache.stream = data.collection
+      }
     })
   }
 
@@ -120,7 +130,6 @@ angular.module('soundmist').service('API', class {
   }
 
   isFavorite (track) {
-    if (!track) return
     if ('favorites' in window.cache && track) {
       return cache.favorites.indexOf(track.id) > -1
     }
@@ -156,7 +165,7 @@ angular.module('soundmist').service('API', class {
 
     return this.$http(config).then(response => {
       if (cache.favorites.indexOf(track.id) > -1) {
-        cache.favorites.splice(cache.favorites.indexOf(track.id))
+        cache.favorites.splice(cache.favorites.indexOf(track.id), 1)
       }
 
       return true
