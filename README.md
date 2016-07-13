@@ -1,4 +1,4 @@
-<img style="float: right; width: 200px" src="http://i.imgur.com/8r6wXYS.png">
+<img align='right' src="http://i.imgur.com/7nR7HrI.png">
 
 # Soundmist
 A Soundcloud desktop client for Windows, Linux and Mac OS X. Built with Electron and AngularJS.
