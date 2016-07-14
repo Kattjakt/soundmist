@@ -21,6 +21,11 @@ angular.module('soundmist').config(function ($stateProvider, $urlRouterProvider,
       templateUrl: 'components/playlist/playlist.html',
       controller: 'playlist'
     })
+    .state('likes', {
+      url: '/likes',
+      templateUrl: 'components/likes/likes.html',
+      controller: 'likes'
+    })
 });
 
 angular.module('soundmist').run(function ($rootScope, Handler) {

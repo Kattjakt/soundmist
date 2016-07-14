@@ -1,0 +1,6 @@
+.likes
+  h1 Your Likes
+  .item(ng-repeat="item in likes")
+    whisper(track="item" queue="likes")
+  
+  md-button(ng-show="likes" ng-click="fetchPage()") Next page

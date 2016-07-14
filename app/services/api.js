@@ -11,7 +11,7 @@ angular.module('soundmist').service('API', class {
     window.cache = {}
     cache.stream = {}
 
-    this.getFavorites().then(ids => window.cache.favorites = ids)
+    this.getFavoritesByID().then(ids => window.cache.favorites = ids)
     this.getPlaylists().then(playlists => window.cache.playlists = playlists)
     this.getUser().then(user => window.cache.user = user)
 
@@ -80,8 +80,6 @@ angular.module('soundmist').service('API', class {
     return this.$http(config).then(response => {
       let data = response.data
 
-
-
       if (this.streamURL) {
         this.streamURL = data.next_href
         return cache.stream = cache.stream.concat(data.collection)
@@ -92,7 +90,7 @@ angular.module('soundmist').service('API', class {
     })
   }
 
-  getFavorites () {
+  getFavoritesByID () {
     let self = this;
     let deferred = this.$q.defer();
     let ids = [];
@@ -127,6 +125,34 @@ angular.module('soundmist').service('API', class {
     })()
 
     return deferred.promise
+  }
+
+  getFavorites (clear) {
+    if (clear) {
+      this.next_href = undefined
+    }
+
+    let config = {
+      method: 'GET',
+      url: this.next_href || this.API_V1 + 'me/favorites',
+      params: {
+        oauth_token: token,
+        linked_partitioning: 1,
+        limit: 20
+      }
+    }
+
+    return this.$http(config).then(response => {
+      let data = response.data
+
+      if (this.next_href) {
+        this.next_href = data.next_href
+        return cache.likes = cache.likes.concat(data.collection)
+      } else {
+        this.next_href = data.next_href
+        return cache.likes = data.collection
+      }
+    })
   }
 
   isFavorite (track) {
