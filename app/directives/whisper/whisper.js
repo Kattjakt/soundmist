@@ -12,6 +12,11 @@ angular.module('soundmist').directive('whisper', function (Player, API) {
       scope.Player = Player
       scope.API = API
 
+      API.ready.promise.then(() => {
+        scope.playlists = cache.playlists
+        console.log(scope.playlists)
+      })
+
       let duration = scope.track.duration / 1000
       var minutes = '0' + Math.floor(duration / 60)
       var seconds = '0' + (duration - minutes * 60);

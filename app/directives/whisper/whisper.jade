@@ -1,7 +1,20 @@
 .whisper
   .controls
-    md-button.md-icon-button.add
-      | +
+    
+    md-menu
+      md-button.md-icon-button.add(ng-click="$mdOpenMenu($event)")
+        span(md-menu-origin) +
+      md-menu-content(width="4")
+        md-menu-item
+          md-button.queue(ng-click="addToQueue(track)")
+            md-icon
+              i(class="material-icons") queue
+            | Add to queue
+        md-menu-divider
+        md-menu-item(ng-repeat="playlist in playlists")
+          md-button(ng-click="addToPlaylist(playlist.id, track)")
+            | {{ playlist.title }}
+        
   
     md-button(class="md-fab" ng-class="{active: Player.isActive(track), isPlaying: Player.isPlaying(track)}" ng-click="Player.isPlaying(track) ? Player.pause(track) : Player.play(track, queue)")
       i(class="material-icons play") play_arrow
