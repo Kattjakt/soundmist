@@ -14,6 +14,9 @@ angular.module('soundmist').service('Player', class {
     this.shuffle = false
     this.queue = []
 
+    this.source = []
+    this.index = 0
+
     this.scope.$watch(() => {
       if (this.Player) return this.Player.progress || 0
     }, progress => {
@@ -30,33 +33,36 @@ angular.module('soundmist').service('Player', class {
   }
 
   getUpcoming (offset) {
-    let index = this.queue.indexOf(this.currentItem)
-    return this.queue[index + offset]
+    return this.source[this.index + offset]
   }
 
   next () {
-    let index = this.queue.indexOf(this.currentItem)
-    var max = this.queue.length
-    if (index + 1 === max) {
+    var max = this.source.length
+    if (this.index + 1 === max) {
       console.log('> max of queue')
       return
     }
 
-    this.play(this.queue[index + 1], this.queue)
+    this.play(this.source[++this.index], this.source)
+  }
+
+  addToQueue (track) {
+    this.source.splice(this.index, 0, track)
+    console.log(this.source.length)
   }
 
   previous () {
-    let index = this.queue.indexOf(this.currentItem)
-    if (index === 0) {
+    if (this.index === 0) {
       console.log('< 0 of queue')
       return
     }
 
-    this.play(this.queue[index - 1], this.queue)
+    this.play(this.source[--this.index], this.source)
   }
 
-  play (item, queue) {
-    this.queue = queue || []
+  play (item, source) {
+    this.source = source || []
+    this.index = this.source.indexOf(item)
 
     if (item === undefined) {
       this.Player.play()
