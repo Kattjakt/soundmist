@@ -10,10 +10,20 @@ angular.module('soundmist').service('API', class {
 
     window.cache = {}
     cache.stream = {}
+    cache.IDs = {}
 
     this.getFavoritesByID().then(ids => window.cache.favorites = ids)
-    this.getPlaylists().then(playlists => window.cache.playlists = playlists)
     this.getUser().then(user => window.cache.user = user)
+    this.getPlaylists().then(playlists => {
+      window.cache.playlists = playlists
+
+      cache.IDs.playlists = playlists.map(item => {
+        return {
+          id: item.id,
+          title: item.title
+        }
+      })
+    })
 
     // Check if we've loaded enough data to display the page
     this.ready = $q.defer()

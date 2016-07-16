@@ -1,6 +1,6 @@
 .playlist
   h1 {{ playlist.title }}
   .item(ng-repeat="track in playlist.tracks track by track.id")
-    whisper(track="track" queue="playlist.tracks")
+    whisper(track="::track" queue="::playlist.tracks")
   
   

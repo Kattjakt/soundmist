@@ -1,4 +1,4 @@
-angular.module('soundmist').directive('whisper', function (Player, API) {
+angular.module('soundmist').directive('whisper', function (Player, API, $window) {
   return {
     restrict: 'E',
     scope: {
@@ -11,6 +11,7 @@ angular.module('soundmist').directive('whisper', function (Player, API) {
     link: function (scope, element, attrs) {
       scope.Player = Player
       scope.API = API
+      scope.$window = $window
 
       let duration = scope.track.duration / 1000
       var minutes = '0' + Math.floor(duration / 60)

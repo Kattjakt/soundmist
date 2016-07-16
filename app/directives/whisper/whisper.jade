@@ -1,6 +1,5 @@
 .whisper
   .controls
-    
     md-menu
       md-button.md-icon-button.add(ng-click="$mdOpenMenu($event)")
         span(md-menu-origin) +
@@ -11,22 +10,22 @@
               i(class="material-icons") queue
             | Add to queue
         md-menu-divider
-        md-menu-item(ng-repeat="playlist in playlists")
+        md-menu-item(ng-repeat="playlist in ::$window.cache.IDs.playlists")
           md-button(ng-click="addToPlaylist(playlist.id, track)")
-            | {{ playlist.title }}
-        
+            | {{ ::playlist.title }}
   
     md-button(class="md-fab" ng-class="{active: Player.isActive(track), isPlaying: Player.isPlaying(track)}" ng-click="Player.isPlaying(track) ? Player.pause(track) : Player.play(track, queue)")
       i(class="material-icons play") play_arrow
       i(class="material-icons pause") pause
 
-    i.material-icons(ng-hide="API.isFavorite(track)" ng-click="Player.setFavorite(track)") favorite_border
-    i.material-icons.red(ng-show="API.isFavorite(track)" ng-click="Player.removeFavorite(track)") favorite
+    div(ng-switch="API.isFavorite(track)")
+      i.material-icons(ng-switch-when="false" ng-click="Player.setFavorite(track)") favorite_border
+      i.material-icons.red(ng-switch-when="true" ng-click="Player.removeFavorite(track)") favorite
     
     .holder
       i.material-icons cached
       i.material-icons link
 
-  .title {{ track.title }}
-  .artist {{ track.user.username }}
-  .duration {{ duration }}
+  .title {{ ::track.title }}
+  .artist {{ ::track.user.username }}
+  .duration {{ ::duration }}
